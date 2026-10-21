@@ -24,6 +24,7 @@ int APS5_VABI sceAppContentGetAddcontInfoList(uint32_t, void*, uint32_t, uint32_
 int APS5_VABI sceAppContentDownloadDataGetAvailableSpaceKb(const AppContentMountPoint*, size_t*);
 int APS5_VABI sceAppContentDownloadDataFormat(const AppContentMountPoint*);
 int APS5_VABI sceAppContentAppParamGetInt(uint32_t, int32_t*);
+int APS5_VABI sceAppContentGetEntitlementKey(uint32_t, const NpUnifiedEntitlementLabel*, void*);
 }
 
 static constexpr int ErrorParameter = static_cast<int>(0x80D90002);
@@ -156,6 +157,19 @@ int main() {
     Require(std::memcmp(info, untouchedInfo, sizeof(info)) == 0);
     Require(sceAppContentGetAddcontInfo(0, nullptr, info) == ErrorParameter);
     Require(sceAppContentGetAddcontInfo(0, &label, nullptr) == ErrorParameter);
+
+    unsigned char key[16];
+    std::memset(key, 0xab, sizeof(key));
+    unsigned char untouchedKey[16];
+    std::memcpy(untouchedKey, key, sizeof(key));
+    Require(sceAppContentGetEntitlementKey(0, &label, key) == ErrorDrmNoEntitlement);
+    Require(std::memcmp(key, untouchedKey, sizeof(key)) == 0);
+    Require(sceAppContentGetEntitlementKey(0, nullptr, key) == ErrorParameter);
+    Require(sceAppContentGetEntitlementKey(0, &label, nullptr) == ErrorParameter);
+    std::memset(key, 0xab, sizeof(key));
+    std::memcpy(untouchedKey, key, sizeof(key));
+    Require(sceAppContentGetEntitlementKey(0, nullptr, nullptr) == ErrorParameter);
+    Require(std::memcmp(key, untouchedKey, sizeof(key)) == 0);
 
     uint32_t hitNum = 0x5a5a5a5a;
     Require(sceAppContentGetAddcontInfoList(0, nullptr, 0, &hitNum) == 0);

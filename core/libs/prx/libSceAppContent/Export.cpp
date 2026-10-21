@@ -28,6 +28,11 @@ struct AppContentAddcontInfo {
     uint32_t status;
 };
 
+struct AppContentEntitlementKey {
+    char data[16];
+};
+static_assert(sizeof(AppContentEntitlementKey) == 16);
+
 namespace {
 
 struct TemporaryData {
@@ -190,6 +195,13 @@ int APS5_VABI sceAppContentGetAddcontDownloadProgress(uint32_t service_label, co
     if (!entitlement_label || !progress) return SCE_APP_CONTENT_ERROR_PARAMETER;
     return SCE_APP_CONTENT_ERROR_NOT_FOUND;
 }
+
+int APS5_VABI sceAppContentGetEntitlementKey(uint32_t service_label, const NpUnifiedEntitlementLabel* entitlement_label, AppContentEntitlementKey* key) {
+    (void)service_label;
+    if (!entitlement_label || !key) return SCE_APP_CONTENT_ERROR_PARAMETER;
+    return SCE_APP_CONTENT_ERROR_DRM_NO_ENTITLEMENT;
+}
+
 int APS5_VABI sceAppContentAddcontEnqueueDownloadByEntitlemetId(void) {
     NotImplemented_nid_no_patch(__func__);
     return 0;
@@ -246,11 +258,6 @@ int APS5_VABI sceAppContentGetAddcontInfoListByIroTag(void) {
 }
 
 int APS5_VABI sceAppContentGetDownloadedStoreCountry(void) {
-    NotImplemented_nid_no_patch(__func__);
-    return 0;
-}
-
-int APS5_VABI sceAppContentGetEntitlementKey(void) {
     NotImplemented_nid_no_patch(__func__);
     return 0;
 }

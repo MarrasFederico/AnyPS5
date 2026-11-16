@@ -32,7 +32,6 @@ void APS5_VABI libSceLibcInternalInventory_019_nid_no_patch(LibcException::Syste
 int APS5_VABI libSceLibcInternalInventory_020_nid_no_patch();
 void APS5_VABI libSceLibcInternalInventory_021_nid_no_patch(void* self);
 void APS5_VABI libSceLibcInternalInventory_022_nid_no_patch(void* self);
-int APS5_VABI libSceLibcInternalInventory_023_nid_no_patch();
 int APS5_VABI libSceLibcInternalInventory_024_nid_no_patch();
 int APS5_VABI libSceLibcInternalInventory_025_nid_no_patch();
 int APS5_VABI libSceLibcInternalInventory_026_nid_no_patch();

@@ -111,11 +111,6 @@ void APS5_VABI libSceLibcInternalInventory_022_nid_no_patch(void* self) {
 }
 APS5_EXPORT("iWNC2tkDgxw", libSceLibcInternalInventory_022_nid_no_patch);
 
-int APS5_VABI libSceLibcInternalInventory_023_nid_no_patch() {
-    NotImplemented_nid_no_patch(__func__);
-}
-APS5_EXPORT("VNaqectsZNs", libSceLibcInternalInventory_023_nid_no_patch);
-
 int APS5_VABI libSceLibcInternalInventory_024_nid_no_patch() {
     NotImplemented_nid_no_patch(__func__);
 }

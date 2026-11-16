@@ -200,6 +200,14 @@ struct Streambuf {
     char** putEnd;
 };
 
+struct FilePosition {
+    std::int64_t offset;
+    std::int64_t filePosition;
+    std::uint64_t state;
+};
+
+static_assert(sizeof(FilePosition) == 0x18);
+
 struct OutputIterator {
     bool failed;
     Streambuf* buffer;

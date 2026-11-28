@@ -337,6 +337,9 @@ std::vector<unsigned char> AnyEncoding(const LibreSsl3Asn1Type* guestParameter, 
         if (value == -1) return {};
         return Element(BooleanTag, {static_cast<unsigned char>(value)});
     }
+    case IntegerType:
+        if (!parameter.value) NotImplemented_nid_no_patch(caller);
+        return IntegerEncoding(parameter.value, caller);
     case SignatureStringType:
         if (!parameter.value) NotImplemented_nid_no_patch(caller);
         return Element(BitStringTag, BitStringContent(CopyIn<LibreSsl3Asn1String>(parameter.value, caller), caller));
